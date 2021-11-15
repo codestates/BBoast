@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import image from '../../lib/11.jpg';
 import { AiOutlineLike } from 'react-icons/ai';
 
 const ContentsBlock = styled.div`
@@ -8,7 +7,6 @@ const ContentsBlock = styled.div`
     .image-box {
         margin-top: 2rem;
         width: 100%;
-        background: wheat;
         display: flex;
         img {
             width: 100%;
@@ -38,7 +36,8 @@ const PostContents = () => {
     return (
         <ContentsBlock>
             <div className="image-box">
-                <img src={image} alt="" />
+                이미지
+                <img src="" alt="" />
             </div>
             <div className="tag-box">
                 <ul>
