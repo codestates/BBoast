@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Input from '../components/auth/Input';
 import Button from '../components/common/Button';
 import ImgUpload from '../components/write/imgUpload';
-import TagBox from '../components/post/TagBox';
+import TagBox from '../components/write/TagBox';
 
 const WritePageBlock = styled.div`
     width: 40%;
