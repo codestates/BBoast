@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Button from '../components/common/Button';
 import PostComments from '../components/post/PostComments';
 import PostContents from '../components/post/PostContents';
+import Footer from '../components/common/Footer';
+import Nav from '../components/common/Nav';
 
 const PostPageBlock = styled.div`
     width: 30%;
@@ -26,18 +28,23 @@ const PostPageBlock = styled.div`
 
 
 const PostPage = () => {
+
     return (
-        <PostPageBlock>
-            <div>
-                <h1>title</h1>
-                <span>2021.11.20</span>
-            </div>
-            <PostContents/>
-            <PostComments/>
-            <div className="move-btn">
-                <Button>메인 화면으로 이동</Button>
-            </div>
-        </PostPageBlock>
+        <>
+            <Nav/>
+            <PostPageBlock>
+                <div>
+                    <h1>title</h1>
+                    <span>2021.11.20</span>
+                </div>
+                <PostContents/>
+                <PostComments/>
+                <div className="move-btn">
+                    <Button>메인 화면으로 이동</Button>
+                </div>
+            </PostPageBlock>
+            <Footer/>
+        </>
     );
 };
 
