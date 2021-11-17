@@ -57,9 +57,9 @@ export const BtnContainer = styled.div`
 const Nav = () => {
 
     const btnArr = [
-        { name: 'write', to: '/' },
+        { name: 'write', to: '/write' },
         { name: 'mypage', to: '/mypage' },
-        { name: 'login', to: '/' }
+        { name: 'logout', to: '/' }
     ];
 
     return <NavContainer>
