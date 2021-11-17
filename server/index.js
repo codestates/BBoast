@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ['https://localhost:3000'],
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE']
   })
@@ -21,11 +21,11 @@ app.use(
 app.use(cookieParser());
 // app.get('/authAccesstoken', controllers.authAccesstoken);
 // app.get('/authRefreshtoken', controllers.authRefreshtoken);
-// app.post('/signup', controllers.signup);
-// app.delete('/withdrawal', controllers.withdrawal);
+app.post('/signup', controllers.signup);
+app.delete('/withdrawal', controllers.withdrawal);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
-
+app.patch('/edit', controllers.edit)
 const port = 4000;
 
 app.listen(port, () => {

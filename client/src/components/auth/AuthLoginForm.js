@@ -112,9 +112,10 @@ const AuthLoginForm = () => {
             setErrorMessage('이메일과 비밀번호를 입력하세요')
             setTimeout(() => setErrorMessage(''), 3000)
         } else {
-            axios.post('https://localhost:3000/login', { email, password }, {headers : { 'Content-Type' : 'application/json'}})
+            axios.post('http://localhost:4000/login', { email, password }, {headers : { 'Content-Type' : 'application/json'}})
             .then((data) => {
-                // ! dispatch(login(data.email, data.password))
+                console.log(data)
+                dispatch(login(data.email, data.password))
             })
             .catch((err) => {
                 setErrorMessage('서버로부터의 응답이 없습니다.')

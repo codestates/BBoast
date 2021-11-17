@@ -8,14 +8,11 @@
 
 module.exports = (req, res) => {
   const { email, password } = req.body;
+  console.log(req)
 
-  if (!req.body.password || !req.body.email) {
-    return res.status(422).send('모든 항목을 입력해 주세요');
-  }
-
-  res.status(401).send({ message: "이메일 혹은 비밀번호가 일치하지 않습니다"});
-
-
+  // ToDo: findOne 메서드를 사용하여 데이터베이스에 해당 email, password를 포함하는 유저정보가 있는지 확인한다.
+  res.status(201).json({ message: "ok" });
+  
   // users.findOne({
   //   where: {
   //     email,
