@@ -13,12 +13,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
 <<<<<<< HEAD
+<<<<<<< HEAD
     origin:
      "http://localhost:3000/"
     //   "http://bboast.net.s3-website-us-east-1.amazonaws.com/",
     //   "https://d18mexsgb8jp34.cloudfront.net/",
     //   "https://www.bboast.net/"
     ,
+=======
+    origin: '*',
+>>>>>>> 51608193e458f6782a0567e70acfefa2313a6865
 =======
     origin: '*',
 >>>>>>> 51608193e458f6782a0567e70acfefa2313a6865
@@ -43,6 +47,9 @@ app.use(cookieParser());
 // app.get('/authRefreshtoken', controllers.authRefreshtoken);
 app.post('/signup', controllers.signup);
 app.delete('/withdrawal', controllers.withdrawal);
+<<<<<<< HEAD
+>>>>>>> 51608193e458f6782a0567e70acfefa2313a6865
+=======
 >>>>>>> 51608193e458f6782a0567e70acfefa2313a6865
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
