@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { AiOutlineLike } from 'react-icons/ai';
 import PostTagList from './PostTagList';
+import CoolBtn from '../common/CoolBtn';
 
 const PostItemStyle = styled.div`    
     background: #fff;
@@ -25,18 +25,34 @@ const PostItemStyle = styled.div`
 `;
 
 
-const PostItem = () => {
+const PostItem = ({ post }) => {
+    // const { post_image, hashtags, cool_count, id } = post;
     return (
         <PostItemStyle>
-            {/* `/:id` 포스트디테일 페이지로 이동 */}
-            <Link to="">
+            {/* 
+            `/:id` 포스트디테일 페이지로 이동
+             <Link to={`/${id}`}>
+                <div className="img-box">
+                    <img src="" alt="" />
+                </div>
+            </Link>
+            */}
+            <Link to="/post">
                 <div className="img-box">
                     <img src="" alt="" />
                 </div>
             </Link>
             <div className="post-box">
-                <PostTagList/>
-                <AiOutlineLike/>
+                <PostTagList
+                //hashtags={hashtags}
+                />
+                {/* 
+                    <div>
+                        <CoolBtn/>
+                        <span>{cool_count}</span>
+                    </div>
+                */}
+                <CoolBtn/>
             </div>
         </PostItemStyle>
     );
