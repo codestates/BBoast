@@ -24,7 +24,6 @@ const TagBoxBlock = styled.div`
 
 const categories = ['#일상', '#멋짐', '#사소', '#플렉스', '#뻔뻔'];
 const TagBox = ({ onclickTag, hashtags, onRemoveTag }) => {
-   
     return (
         <TagBoxBlock>
             <div>
@@ -38,11 +37,11 @@ const TagBox = ({ onclickTag, hashtags, onRemoveTag }) => {
                 </ul>
             </div>
             <ul className="tag-category">
-                {/* {hashtags.map((hashtag, idx) => (
+                {hashtags.map((hashtag, idx) => (
                     <li key={idx} onClick={() => onRemoveTag(idx)}>
                         <button type="button">{hashtag}</button>
                     </li>
-                ))} */}
+                ))}
             </ul>
         </TagBoxBlock>
     );
