@@ -4,15 +4,18 @@ import Button from '../common/Button';
 import Input from '../auth/Input';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { userInfoEdit } from '../../actions/authActions';
+import palette from '../../style/palette';
 
 const Input2 = styled(Input)`
     margin-top: 1rem;
-    border: solid 2px wheat;
+    border: solid 2px ${palette.wheat[0]};
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     border-radius: 0.3rem;
 
     &:focus {
-        border: solid 2px orange;
+        border: solid 2px ${palette.orange[0]};
         opacity: 0.7;
     }
 `;
@@ -32,7 +35,7 @@ const AuthEditFormBlock = styled.div`
         justify-content: center;
         margin-top: 1rem;
         p {
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid black;
             cursor: pointer;
             font-size: 0.8rem;
         }
@@ -41,26 +44,22 @@ const AuthEditFormBlock = styled.div`
 
 const Message = styled.div`
     font-size: 10px;
-    color: red;
+    color: ${palette.red[0]};
     margin-left: 2px;
-
-`
+`;
 
 const AuthButton = styled(Button)`
     width: 100%;
     padding: 0.75rem 0 ;
     margin-top: 1rem;
     font-size: 1.2rem;
-    background: orange;
-    &:hover {
-        opacitY: 0.4;
-    }
 `;
 
-const AuthEditForm = ({ deleteUserClick }) => {
+const AuthEditForm = ({ deleteUserClick, modalToggle }) => {
     
     const history = useHistory();
-
+    const state = useSelector( state => state.auth)
+    const dispatch = useDispatch();
     // 이름, 이메일, 비밀번호, 비밀번호 확인
     const [userInfo, setUserInfo] = useState({
         name: '',
@@ -137,15 +136,12 @@ const AuthEditForm = ({ deleteUserClick }) => {
         if( name === '' || email === '' || password === '' || confirm === ''){
             setErrorMessage('모든 항목은 필수입니다')
         } else {
-            axios.patch('https://localhost:3000/signup', { name, email, password, confirm }, { headers : { 'Content-Type' : 'application/json'}})
+            axios.patch('https://localhost:3000/edit', { name, email, password, confirm }, { headers : { 'Content-Type' : 'application/json'}})
             .then((data) => {
-                if(data){
-                    setErrorMessage('이미 존재하는 회원입니다.')
-                } else {
-                    // ToDo: 받아온 데이터를 상태에 저장합니다.
-                    // 로그인 창으로 이동합니다.
-                    history.push("/")
-                }
+                // ToDo: 받아온 데이터를 상태에 저장합니다.
+                // ! dispatch(userInfoEdit(username, email, password))
+                // 로그인 창으로 이동합니다.
+                history.push("/mypage")
             })
             .catch((err) => {
                 setErrorMessage('올바르지 않은 회원정보입니다.')
@@ -168,31 +164,31 @@ const AuthEditForm = ({ deleteUserClick }) => {
             />
             <Message>{nameMessage}</Message>
             <Input2 
-                type="email"
-                autoComplete="on"
-                name="email"
-                placeholder="email"
-                value={userInfo.email}
-                onChange={handleInputEmail}
+                    type="email"
+                    autoComplete="on"
+                    name="email"
+                    placeholder="email"
+                    value={userInfo.email}
+                    onChange={handleInputEmail}
                 />
                 <Message>{emailMessage}</Message>
                 <Input2 
-                type="password" 
-                name="password"
-                placeholder="password"
-                value={userInfo.password}
-                onChange={handleInputPassword}
+                    type="password" 
+                    name="password"
+                    placeholder="password"
+                    value={userInfo.password}
+                    onChange={handleInputPassword}
                 />
                 <Message>{passwordMessage}</Message>
                 <Input2 
-                type="password"
-                name="passwordConfirm"
-                placeholder="confirm password"
-                value={userInfo.passwordConfirm}
-                onChange={handleInputPasswordConfirm}
+                    type="password"
+                    name="passwordConfirm"
+                    placeholder="confirm password"
+                    value={userInfo.passwordConfirm}
+                    onChange={handleInputPasswordConfirm}
                 />
                 <Message>{passwordConfirmMessage}</Message>
-                <AuthButton onClick={handleEdit}>회원정보 수정</AuthButton>
+                <AuthButton onClick={handleEdit}>Edit</AuthButton>
             </form>
             <div className="userInfo-delete" onClick={deleteUserClick}>
                 <p>Delete your <b>BBoast</b> account</p>

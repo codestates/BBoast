@@ -39,7 +39,7 @@ const ModalTemplate = ({ children, modalToggle}) => {
     return (
         <ModalBackground >
             <ModalBox >
-                <div className="close"onClick={modalToggle} >
+                <div className="close" onClick={modalToggle} >
                     <FaTimes />
                 </div>
             { children }

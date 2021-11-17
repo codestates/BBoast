@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Button from '../common/Button';
 
@@ -12,13 +14,27 @@ const AskDeleteUserBlock = styled.div`
 `;
 const AskButton = styled(Button)``;
 
-const AskDeleteUser = () => {
+const AskDeleteUser = ({modalToggle}) => {
+
+    const history = useHistory();
+    // ToDo: 계정 삭제 핸들러
+    const handleDelete = () => {
+        axios.delete('https://localhost.com/delete:postId')
+        .then((res) => {
+            console.log(res)
+            history.push('/')
+        })
+        .catch((err) => {
+            history.push('/mypage')
+        })
+    }
+
     return (
         <AskDeleteUserBlock>
             <h3>계정을 삭제하시겠습니까?</h3>
             <div className="check-box">
-                <AskButton>확인</AskButton>
-                <AskButton>취소</AskButton>
+                <AskButton onClick={handleDelete}>확인</AskButton>
+                <AskButton onClick={modalToggle}>취소</AskButton>
             </div>
         </AskDeleteUserBlock>
     );

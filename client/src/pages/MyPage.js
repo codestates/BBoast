@@ -6,6 +6,7 @@ import { FaTimes } from 'react-icons/fa';
 import ModalTemplate from '../components/modal/ModalTemplate';
 import AuthEditModal from '../components/modal/AuthEditModal';
 import AuthEditForm from '../components/modal/AuthEditForm';
+import palette from '../style/palette';
 
 const MyPageContainer = styled.div`
     width: 30%;
@@ -45,6 +46,9 @@ const EditBtn = styled.button`
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+    &:hover {
+        background-color: ${palette.gray[2]}
+    }
     
 `;
 
@@ -89,12 +93,18 @@ const DeleteBtn = styled.div`
     bottom: 70px;
     left: 55px;
     font-size: 20px;
+    cursor: pointer;
 `;
 
 const MyPage = () => {
     const [isOpen, setIsOpen] = useState(false)
     const modalToggle = () => {
         isOpen ? setIsOpen(false) : setIsOpen(true)
+    }
+
+    // ToDo: 글 삭제 핸들러 함수
+    const handleDeleteBtn = () => {
+        
     }
 
     return (
@@ -118,19 +128,19 @@ const MyPage = () => {
                 <MyPosts>
                     <MyPost>
                         <Thumbnail alt="mypost" src="https://en.pimg.jp/043/365/839/1/43365839.jpg" />
-                        <DeleteBtn>
+                        <DeleteBtn onClick={handleDeleteBtn}>
                             <FaTimes />
                         </DeleteBtn>
                     </MyPost>
                     <MyPost>
                         <Thumbnail alt="mypost" src="https://png.pngtree.com/png-clipart/20210130/ourlarge/pngtree-pink-quilt-get-up-clip-art-png-image_2836982.jpg" />
-                        <DeleteBtn>
+                        <DeleteBtn onClick={handleDeleteBtn}>
                             <FaTimes />
                         </DeleteBtn>
                     </MyPost>
                     <MyPost>
                         <Thumbnail alt="mypost" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd798uRbi3sIPw4eLfinsK0G2i_wQjNlrLDw&usqp=CAU" />
-                        <DeleteBtn>
+                        <DeleteBtn onClick={handleDeleteBtn}>
                             <FaTimes />
                         </DeleteBtn>
                     </MyPost>
@@ -141,11 +151,9 @@ const MyPage = () => {
                 {
                     isOpen ?
                     (
-                        <ModalTemplate modalToggle={modalToggle} children={AuthEditModal}>
-                            <AuthEditModal >
-                                <AuthEditForm/>
-                            </AuthEditModal>
-                        </ModalTemplate>
+                        <AuthEditModal modalToggle={modalToggle}>
+                            <AuthEditForm/>
+                        </AuthEditModal>
                     ) : 
                     null
                 }
