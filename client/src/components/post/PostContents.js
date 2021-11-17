@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlineLike } from 'react-icons/ai';
+import Hashtag from '../common/Hashtag';
+import CoolBtn from '../common/CoolBtn';
 
 const ContentsBlock = styled.div`
     margin-bottom: 2rem;
@@ -18,21 +19,11 @@ const ContentsBlock = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        button {
-            font-size: 1rem;
-            color: #b3b3b3;
-            border: 1px solid #e8e5e5;
-            border-radius: 20px;
-            padding: 0.3rem 0.8rem;
-            &:focus {
-                color: violet;
-                border: 1px solid violet;
-            }
-        }
     }
 `;
 
-const PostContents = () => {
+const PostContents = ({ post }) => {
+    // const { post_title, post_content, post_image, hashtags } = post
     return (
         <ContentsBlock>
             <div className="image-box">
@@ -40,13 +31,10 @@ const PostContents = () => {
                 <img src="" alt="" />
             </div>
             <div className="tag-box">
-                <ul>
-                    <li>
-                        <button>#뻔뻔</button>
-                        <button>#멋짐</button>
-                    </li>
-                </ul>
-                <AiOutlineLike/>
+                <Hashtag
+                //hashtags={hashtags}
+                />
+                <CoolBtn/>
             </div>
             <p>description</p>
         </ContentsBlock>
