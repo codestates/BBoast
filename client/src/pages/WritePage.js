@@ -8,7 +8,6 @@ import Footer from '../components/common/Footer';
 import Nav from '../components/common/Nav';
 import TagBox from '../components/write/TagBox';
 import { addHashtag, removeHashtag, writePost, changeField, writeInitialize } from '../reducer/writeReducer';
-import { changeInput } from '../reducer/commentsReducer';
 
 const WritePageBlock = styled.div`
     width: 40%;

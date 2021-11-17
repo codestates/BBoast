@@ -26,6 +26,7 @@ const PostItemStyle = styled.div`
 
 const PostItem = ({ post }) => {
     // const { post_image, hashtags, cool_count, id } = post;
+
     return (
         <PostItemStyle>
             {/* 
@@ -43,7 +44,7 @@ const PostItem = ({ post }) => {
             </Link>
             <div className="post-box">
                 <PostTagList
-                //hashtags={hashtags}
+                // hashtags={hashtags}
                 />
                 {/* 
                     <div>

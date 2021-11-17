@@ -21,11 +21,11 @@ const PostList = ({ posts, loading, error }) => {
     // }
     return (
         <PostListBlock>
-            {/* 
-                {posts.map(post => (
+            
+                {/* {posts.map(post => (
                     <PostItem key={post.id} post={post} />
-                ))}
-            */}
+                ))} */}
+           
             <PostItem/>
             <PostItem/>
             <PostItem/>

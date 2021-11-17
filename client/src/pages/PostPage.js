@@ -1,11 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../components/common/Button';
 import PostComments from '../components/post/PostComments';
 import PostContents from '../components/post/PostContents';
 import Footer from '../components/common/Footer';
 import Nav from '../components/common/Nav';
+import { viewPost, initializeViewPost } from '../reducer/postReducer';
 
 const PostPageBlock = styled.div`
     width: 40%;
@@ -28,41 +30,56 @@ const PostPageBlock = styled.div`
 
 
 const PostPage = () => {
-    /*
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { post, error, loading, comments, coolBtn } = useSelector(({ post, error, loading, comment, cool }) => ({
+    const { post, error, loading, comments } = useSelector(({ post, error, loading, comment, cool }) => ({
         post: post.post,
         error: post.error,
         loading: post.loading,
-        comments: comments.comments,
-        coolBtn : 
+        comments: comment.comments,
+        // coolBtn : 
     }));
 
-    쿨버튼 클릭
-    const onClickCoolBtn = (포스트 아이디, 유저 아이디) => {
-        dispatch(clickCoolBtn(포스트 아이디, 유저 아이디));
-    }
+    // 쿨버튼 클릭
+    // const onClickCoolBtn = (포스트 아이디, 유저 아이디) => {
+    //     dispatch(clickCoolBtn(포스트 아이디, 유저 아이디));
+    // }
 
-    useEffect(() => {
-        dispatch(viewPost(id));
-        return () => {
-            dispatch(initializeViewPost());
-        }
-    },[dispatch, id]);
+    // useEffect(() => {
+    //     dispatch(viewPost(id));
+    //     return () => {
+    //         dispatch(initializeViewPost());
+    //     }
+    // },[dispatch, id]);
+    // if(loading){
+    //     return (
+    //         <>
+    //             <Nav/>
+    //             <PostPageBlock>로딩중...</PostPageBlock>;
+    //             <Footer/>
+    //         </>
+    //     )
+    // }
+    // if(!post){
+    //     return (
+    //         <>
+    //             <Nav/>
+    //             <PostPageBlock>존재하지 않는 글입니다.</PostPageBlock>;
+    //             <Footer/>
+    //         </>
+    //     )
+    // }
+    // if(error){
+    //     return (
+    //         <>
+    //             <Nav/>
+    //             <PostPageBlock>에러가 발생했습니다.</PostPageBlock>;
+    //             <Footer/>
+    //         </>
+    //     )
+    // }
 
-    if(!post){
-        return <PostPageBlock>존재하지 않는 글입니다.</PostPageBlock>;
-    }
-    if(error){
-        return <PostPageBlock>에러가 발생했습니다.</PostPageBlock>;
-    }
-    if(loading){
-        return <PostPageBlock>로딩중...</PostPageBlock>;
-    }
-
-    const { id, post_title, post_content, post_image, created_at, hashtags} = post
-    */
+    // const { id, post_title, post_content, post_image, created_at, hashtags} = post
 
     return (
         <>
