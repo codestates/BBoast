@@ -51,7 +51,7 @@ export const writePost = ({ post_title, post_content, post_image, hashtags }) =>
 
 //초깃값
 const initialState = {
-    title: '',
+    post_title: '',
     post_content: '',
     hashtags: [],
     post_image: '',
