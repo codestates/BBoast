@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const CommentListBlock = styled.div`
     li {
         margin-bottom: 0.7rem;
-    }
-    p {
-        margin-top: 0.3rem;
+        p {
+            margin-top: 0.3rem;
+        }
     }
 `;
 
