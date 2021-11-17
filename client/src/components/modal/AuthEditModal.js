@@ -14,9 +14,9 @@ const AuthEditModal = ({ modalToggle }) => {
     return (
         <ModalTemplate modalToggle={modalToggle}>
             { deleteUser ? (
-            <AskDeleteUser/>
+            <AskDeleteUser modalToggle={modalToggle}/>
             ) : (
-                <AuthEditForm deleteUserClick={deleteUserClick}/>
+                <AuthEditForm deleteUserClick={deleteUserClick} modalToggle={modalToggle}/>
             )}
         </ModalTemplate>
     );

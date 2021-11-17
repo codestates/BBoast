@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, userInfo } from '../../actions/authActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../common/Button';
 import Input from './Input';
 import axios from 'axios'
+import palette from '../../style/palette';
 
 const Input2 = styled(Input)`
     margin-top: 1rem;
-    border: solid 2px wheat;
+    border: solid 2px ${palette.wheat[0]};
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     border-radius: 0.3rem;
 
     &:focus {
-        border: solid 2px orange;
+        border: solid 2px ${palette.orange[0]};
         opacity: 0.7;
     }
 `;
@@ -26,10 +29,6 @@ const AuthButton = styled(Button)`
     padding: 0.75rem 0 ;
     margin-top: 1rem;
     font-size: 1.2rem;
-    background: orange;
-    &:hover {
-        opacity: 0.4;
-    }
 `;
 
 const AuthFormFooter = styled.div`
@@ -40,28 +39,28 @@ const AuthFormFooter = styled.div`
         text-decoration: underline;
         color: inherit;
         &:hover {
-            color: red;
+            color: ${palette.red[0]};
         }
     }
 `;
 
 const Message = styled.div`
 font-size: 10px;
-color: red;
+color: ${palette.red[0]};
 margin-left: 2px;
 
 `
 const ErrorMessage = styled.div`
 font-size: 15px;
-color: black;
+color: ${palette.red[0]};
 text-align: center;
 padding-top: 1rem;
 `
 
 
 const AuthLoginForm = () => {
-    
-    
+    const state = useSelector( state => state.auth);
+    const dispatch = useDispatch();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: ''
@@ -106,18 +105,20 @@ const AuthLoginForm = () => {
         }
     }
 
-    const handleSignUp = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
         const { email, password } = loginInfo;
         if(email === '' || password === '') {
             setErrorMessage('이메일과 비밀번호를 입력하세요')
+            setTimeout(() => setErrorMessage(''), 3000)
         } else {
             axios.post('https://localhost:3000/login', { email, password }, {headers : { 'Content-Type' : 'application/json'}})
             .then((data) => {
-
+                // ! dispatch(login(data.email, data.password))
             })
             .catch((err) => {
-                setErrorMessage('존재하지 않는 유저 정보입니다 ')
+                setErrorMessage('서버로부터의 응답이 없습니다.')
+                setTimeout(() => setErrorMessage(''), 3000)
             })
         }
     }
@@ -126,23 +127,23 @@ const AuthLoginForm = () => {
         <AuthFormBlock>
             <form >
                 <Input2 
-                type="email"
-                autoComplete="on"
-                name="email"
-                placeholder="email"
-                value={loginInfo.email}
-                onChange={handleInputEmail}
+                    type="email"
+                    autoComplete="on"
+                    name="email"
+                    placeholder="email"
+                    value={loginInfo.email}
+                    onChange={handleInputEmail}
                 />
                 <Message>{emailMessage}</Message>
                 <Input2 
-                type="password" 
-                name="password"
-                placeholder="password"
-                value={loginInfo.password}
-                onChange={handleInputPassword}
+                    type="password" 
+                    name="password"
+                    placeholder="password"
+                    value={loginInfo.password}
+                    onChange={handleInputPassword}
                 />
                 <Message>{passwordMessage}</Message>
-                <AuthButton onClick={handleSignUp}>Login</AuthButton>
+                <AuthButton onClick={handleLogin}>Login</AuthButton>
                 <ErrorMessage>{errorMessage}</ErrorMessage>
             </form>
             <AuthFormFooter>

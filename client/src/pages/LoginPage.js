@@ -23,14 +23,22 @@ const SocialButton = styled(Button)`
     background: #fff;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     gap: 1rem;
+    &:hover {
+        background-color: white;
+    }
 `;
 
 const LoginPage = () => {
+    const socialLoginHandler = () => {
+        // ToDo: 정확한 구글 소셜로그인 URL 알아내기
+        let GOOGLE_LOGIN_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+        window.location.assign(GOOGLE_LOGIN_URL)
+    }
     return (
         <AuthTemplate>
             <AuthLoginForm/>
             <SocialLoginBox>
-                <SocialButton>
+                <SocialButton onClick={socialLoginHandler}>
                     <FcGoogle/> 
                     <p>Continue with Google</p>
                 </SocialButton>
