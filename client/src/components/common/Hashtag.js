@@ -22,7 +22,7 @@ const Tag = styled.div`
 
 const Hashtag = ({ hashtags }) => {
 
-    const tags = ['#일상', '#멋짐', '#뻔뻔'];
+    const tags = ['일상', '멋짐', '뻔뻔'];
     return (
         <Tag>
             {tags.map((hashtag, idx) => (
@@ -30,7 +30,7 @@ const Hashtag = ({ hashtags }) => {
                 className="tag"
                 key={idx}
                 to={`/main?hashtag=${hashtag}`}
-                >{hashtag}</Link> 
+                >#{hashtag}</Link> 
             ))}
         </Tag>
     );
