@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Input from '../components/auth/Input';
 import Button from '../components/common/Button';
 import Footer from '../components/common/Footer';
 import Nav from '../components/common/Nav';
-import ImgUpload from '../components/write/imgUpload';
 import TagBox from '../components/write/TagBox';
+import { addHashtag, removeHashtag, writePost, changeField, writeInitialize } from '../reducer/writeReducer';
+import { changeInput } from '../reducer/commentsReducer';
 
 const WritePageBlock = styled.div`
     width: 40%;
@@ -51,136 +53,107 @@ const WriteButton = styled(Button)`
 `;
 
 const WritePage = () => {
-    /*
+    const history = useHistory();
     const dispatch = useDispatch();
-    const { hashtags, post } = useSelector(({ write }) => ({
+    const { post_title, post_content, post_image, hashtags, post, postError } = useSelector(({ write }) => ({
+        post_title: write.post_title,
+        post_content: write.post_content,
+        post_image: write.post_image,
         hashtags: write.hashtags,
         post: write.post,
-        postError: write
+        postError: write.postError
     }))
-    */
-    const [imgFile, setImgFile] = useState('');
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [selectTag, setSelectTag] = useState([]); //hashtags
+
+    // const [imgFile, setImgFile] = useState('');
+
+    const onChangeTitle = e => {
+        dispatch(changeField({
+            key: 'post_title',
+            value: e.target.value,
+        }));
+    }
+
+    const onChangeContent = e => {
+        dispatch(changeField({
+            key: 'post_content',
+            value: e.target.value,
+        }));
+    }
 
     //태그선택
-    /*
     const onclickTag = (hashtag) => {
-        if(!tag){
+        if(!hashtag){
             return;
         }
-        if(hashtags.includes(tag)){
+        if(hashtags.includes(hashtag)){
             return;
         }
         dispatch(addHashtag(hashtag))
     }
-    */
-    const onclickTag = (tag) => {
-        setSelectTag([
-            ...selectTag,
-            tag
-        ])
-    }
+
     //선택한 태그 삭제
-    /*
     const onRemoveTag = (id) => {
         dispatch(removeHashtag(id));
     }
 
-    */
-    const onRemoveTag = (id) => {
-        const filterTag = selectTag.filter((tag, idx) => idx !==id);
-        setSelectTag(filterTag);
+    const onPublish = () => {
+        dispatch(writePost({
+            post_title,
+            post_content,
+            hashtags,
+        }))
     }
 
-    //사진 미리보기
-    const onFileChange = e => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => {
-            const { result } = finishedEvent.currentTarget
-            setImgFile(result)
+    useEffect(() => {
+        if(post){
+            //글이 잘 등록되었으면 작성된 글의 상세페이지로 이동
+            const { id } = post;
+            history.push(`/posts/${id}`);
         }
-        if(file){
-            //readAsDataURL함수 : 파일 정보를 인자로 받아서 파일 위치를 URL로 반환
-            reader.readAsDataURL(file);
+        if(postError){
+            console.log(postError);
         }
-    }
-    //선택한 사진 취소하기
-    const onRemoveImgFile = () => {
-        setImgFile('')
-    }
+    })
 
-    //글 폼 전송하기
-    /*
-        FormData.append을 사용하여 key/value 쌍을 추가
-
-        const submitForm = (e) => {
-           e.preventDefault();
-
-            const formData = new FormData();
-            formData.append('post_title', title);
-            formData.append('post_content', content);
-            formData.append('post_image', imgFile);
-            formData.append('hashtags', hashtags);
-
-            axios.post(url, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            })
-            .then((response) => {
-                성공하면 생성된 포스트를 받고, 해당 상세페이지로 이동
-                
-                history.push(`/posts'${id});
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-        } 
-        사용자가 글쓰기 페이지 벗어날때 내용 초기화
-        useEffect(() => {
-            return () => {
-                dispatch(writeInitialize());
-            }
-        })
-    */
+    // 사용자가 글쓰기 페이지 벗어날때 내용 초기화
+    useEffect(() => {
+        return () => {
+            dispatch(writeInitialize());
+        }
+    },[dispatch]);
+    
 
     return (
         <>
             <Nav/>
             <WritePageBlock>
-                <form 
-                //onSubmit={onSubmitForm}
-                >
+                <form>
                     <InputStyle 
                     type="text"
                     placeholder="제목"
-                    name="title" 
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    name="title"
+                    value={post_title} 
+                    onChange={onChangeTitle}
                     />
-                    <ImgUpload
-                    imgFile={imgFile}
-                    onFileChange={onFileChange}
-                    onRemoveImgFile={onRemoveImgFile}
-                    />
+                    {/* <ImgUpload
+                    // imgFile={imgFile}
+                    // onFileChange={onFileChange}
+                    // onRemoveImgFile={onRemoveImgFile}
+                    /> */}
                     <TextareaStyle 
                     name="description" 
                     placeholder="내용을 입력하세요."
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    value={post_content}
+                    onChange={onChangeContent}
                     >
                     </TextareaStyle>
                     <TagBox 
-                    //hashtags
-                    selectTag={selectTag}
+                    hashtags={hashtags}
                     onclickTag={onclickTag}
                     onRemoveTag={onRemoveTag}
                     />
                     <div className="check-btn">
-                        <Button>글 등록</Button>
+                        <Button onClick={onPublish}>글 등록</Button>
                         <WriteButton>
                             <Link to="/main">취소</Link>
                         </WriteButton>
