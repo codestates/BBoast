@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../common/Button';
-import Input from '../auth/Input';
-import axios from 'axios';
-import { useHistory } from 'react-router';
+import Input from './Input';
+import axios from 'axios'
 
 const Input2 = styled(Input)`
     margin-top: 1rem;
@@ -17,48 +17,48 @@ const Input2 = styled(Input)`
     }
 `;
 
-const AuthEditFormBlock = styled.div`
+const AuthFormBlock = styled.div`
     margin-top: 1rem;
-    .logo {
-        display: block;
-        font-size: 3rem;
-        padding-bottom: 2rem;
-        text-align: center;
-        font-weight: bold;
-        letter-spacing: 2px;
-    }
-    .userInfo-delete {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        p {
-            border-bottom: 1px solid #000;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-    }
 `;
-
-const Message = styled.div`
-    font-size: 10px;
-    color: red;
-    margin-left: 2px;
-
-`
 
 const AuthButton = styled(Button)`
     width: 100%;
-    padding: 0.75rem 0 ;
+    padding: 0.75rem 0;
     margin-top: 1rem;
     font-size: 1.2rem;
     background: orange;
     &:hover {
-        opacitY: 0.4;
+        opacity: 0.4;
     }
 `;
 
-const AuthEditForm = ({ deleteUserClick }) => {
-    
+const AuthFormFooter = styled.div`
+    text-align: center;
+    margin-top: 2rem;
+    a {
+        font-size: 0.8rem;
+        text-decoration: underline;
+        color: inherit;
+        &:hover {
+            color: red;
+        }
+    }
+`;
+const Message = styled.div`
+font-size: 10px;
+color: red;
+margin-left: 2px;
+
+`
+const ErrorMessage = styled.div`
+font-size: 15px;
+color: red;
+text-align: center;
+padding-top: 1rem;
+`
+
+const AuthSignUpForm = () => {
+
     const history = useHistory();
 
     // 이름, 이메일, 비밀번호, 비밀번호 확인
@@ -80,6 +80,7 @@ const AuthEditForm = ({ deleteUserClick }) => {
     const [isEmail, setIsEmail] = useState(false);
     const [isPassword, setIsPassword] = useState(false);
     const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+
 
     const handleInputName = (e) => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -130,14 +131,14 @@ const AuthEditForm = ({ deleteUserClick }) => {
         }
     }
 
-    const handleEdit = (e) => {
+
+    const handleSignUp = (e) => {
         e.preventDefault();
         const { name, email, password, confirm } = userInfo;
-        // Todo: Store 만들어서 유저 정보를 전역 변수를 관리해야 한다.
         if( name === '' || email === '' || password === '' || confirm === ''){
             setErrorMessage('모든 항목은 필수입니다')
         } else {
-            axios.patch('https://localhost:3000/signup', { name, email, password, confirm }, { headers : { 'Content-Type' : 'application/json'}})
+            axios.post('https://localhost:3000/signup', { name, email, password, confirm }, { headers : { 'Content-Type' : 'application/json'}})
             .then((data) => {
                 if(data){
                     setErrorMessage('이미 존재하는 회원입니다.')
@@ -154,20 +155,18 @@ const AuthEditForm = ({ deleteUserClick }) => {
 
     }
     return (
-        <div>
-        <AuthEditFormBlock>
-            <h1 className="logo">BBoast</h1>
-            <form>
-            <Input2 
+        <AuthFormBlock>
+           <form >
+                <Input2 
                 type="text"
                 autoComplete="on" 
                 name="name"
                 placeholder="name"
                 value={userInfo.name}
                 onChange={handleInputName}
-            />
-            <Message>{nameMessage}</Message>
-            <Input2 
+                />
+                <Message>{nameMessage}</Message>
+                <Input2 
                 type="email"
                 autoComplete="on"
                 name="email"
@@ -192,14 +191,14 @@ const AuthEditForm = ({ deleteUserClick }) => {
                 onChange={handleInputPasswordConfirm}
                 />
                 <Message>{passwordConfirmMessage}</Message>
-                <AuthButton onClick={handleEdit}>회원정보 수정</AuthButton>
-            </form>
-            <div className="userInfo-delete" onClick={deleteUserClick}>
-                <p>Delete your <b>BBoast</b> account</p>
-            </div>
-        </AuthEditFormBlock>
-        </div>
+                <AuthButton onClick={handleSignUp}>Sign Up</AuthButton>
+                <ErrorMessage>{errorMessage}</ErrorMessage>
+           </form>
+           <AuthFormFooter>
+                <Link to="/">Login</Link>
+            </AuthFormFooter>
+        </AuthFormBlock>
     );
 };
 
-export default AuthEditForm;
+export default AuthSignUpForm;

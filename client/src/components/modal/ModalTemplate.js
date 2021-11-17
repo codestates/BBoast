@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 
 const ModalBackground = styled.div`
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -20,6 +21,7 @@ const ModalBox = styled.div`
     background: #fff;
     border-radius: 2px;
     padding: 2rem; 
+    z-index: 2;
     .close {
         display: flex;
         justify-content: flex-end;
@@ -31,11 +33,13 @@ const ModalBox = styled.div`
     }
 `;
 
+
+
 const ModalTemplate = ({ children, modalToggle}) => {
     return (
-        <ModalBackground>
-            <ModalBox>
-                <div className="close" onClick={modalToggle}>
+        <ModalBackground >
+            <ModalBox >
+                <div className="close"onClick={modalToggle} >
                     <FaTimes />
                 </div>
             { children }
