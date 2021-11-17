@@ -53,8 +53,10 @@ const WriteButton = styled(Button)`
 const WritePage = () => {
     /*
     const dispatch = useDispatch();
-    const { hashtags } = useSelector(({ write }) => ({
+    const { hashtags, post } = useSelector(({ write }) => ({
         hashtags: write.hashtags,
+        post: write.post,
+        postError: write
     }))
     */
     const [imgFile, setImgFile] = useState('');
@@ -129,13 +131,22 @@ const WritePage = () => {
                 }
             })
             .then((response) => {
-
+                성공하면 생성된 포스트를 받고, 해당 상세페이지로 이동
+                
+                history.push(`/posts'${id});
             })
             .catch((error) => {
-
+                console.log(error)
             });
         } 
+        사용자가 글쓰기 페이지 벗어날때 내용 초기화
+        useEffect(() => {
+            return () => {
+                dispatch(writeInitialize());
+            }
+        })
     */
+
     return (
         <>
             <Nav/>
