@@ -6,15 +6,9 @@ const CoolBtnContainer = styled.div`
     display:flex;
     justify-content: center;
     align-items: center;
-    height: 20px;
-    width: 50px;
-    background-color: #FAFAFA;
-    border: none;
     color: #00C6BC;
     font-weight: 700;
     border-radius: 40px;
-    font-size: 14px;
-    border: solid 1px #00C6BC;
     cursor: pointer;
 `;
 
@@ -25,7 +19,7 @@ const BtnNum = styled.div`
     align-items: flex-end;
     color: #00C6BC;
     margin-left: 5px;
-    font-size: 10px;
+    font-size: 0.7rem;
 `;
 
 const CoolBtn = () => {
