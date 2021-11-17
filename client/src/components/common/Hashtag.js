@@ -1,50 +1,39 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import palette from "../../style/palette";
 
-
-export const Tag = styled.button`
-width: 70px;
-height: 30px;
-font-size: 12px;
-background-color: white;
-border-radius: 14px;
-color: #959595;
-font-size: 13px;
-font-weight: 500;
-text-decoration: none;
-border: solid 1px #EEEEEE;
-cursor: pointer;
-margin: 0 5px;
-:focus {
-    color: #00C6BC;
-    border: solid 1px #00C6BC;
-    
-
-}
-`
-export const TagContainer = styled.div`
-height: 50px;
-width: 100%;
-border: solid 1px white;
-display: flex;
-justify-content: center;
-align-items: center;
-background-color: white;
-`
-
-
-const Hashtag = () => {
-
-    const tagArr = [
-        { name: '#방청소' },
-        { name: '#기상미션' },
-        { name: '#다이어트' }
-    ]
-    return <TagContainer>
-        {
-            tagArr.map((tag, idx) => <Tag key={idx}>{tag.name}</Tag>)
+const Tag = styled.div`
+    .tag {
+        font-size: 0.8rem;
+        color: ${palette.gray[4]};
+        border: 1px solid ${palette.gray[3]};
+        border-radius: 20px;
+        padding: 0.3rem 0.8rem;
+        text-decoration: none;
+        margin-right: 0.5rem;
+        transition: all.3s;
+        &:hover {
+            color: ${palette.orange[2]};
+            border: 1px solid ${palette.orange[2]};
         }
-    </TagContainer>
-}
+    }
+`;
+
+const Hashtag = ({ hashtags }) => {
+
+    const tags = ['#일상', '#멋짐', '#뻔뻔'];
+    return (
+        <Tag>
+            {tags.map((hashtag, idx) => (
+                <Link 
+                className="tag"
+                key={idx}
+                to={`/main?hashtag=${hashtag}`}
+                >{hashtag}</Link> 
+            ))}
+        </Tag>
+    );
+};
 
 export default Hashtag;
