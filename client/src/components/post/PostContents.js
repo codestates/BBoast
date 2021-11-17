@@ -22,7 +22,7 @@ const ContentsBlock = styled.div`
     }
 `;
 
-const PostContents = ({ post }) => {
+const PostContents = ({ post, onClickCoolBtn }) => {
     // const { post_title, post_content, post_image, hashtags } = post
     return (
         <ContentsBlock>
@@ -33,7 +33,9 @@ const PostContents = ({ post }) => {
                 <Hashtag
                 //hashtags={hashtags}
                 />
-                <CoolBtn/>
+                <CoolBtn
+                //onClickCoolBtn={onClickCoolBtn}
+                />
             </div>
             <p>description</p>
         </ContentsBlock>
