@@ -1,18 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Input from '../auth/Input';
 import Button from '../common/Button';
+import CommentList from './CommentList';
 
 const PostCommentsBlock = styled.div`
     margin-bottom: 2rem;
     form {
         display: flex;
         margin-bottom: 1rem;
-    }
-    .comments-list {
-        li {
-            margin-bottom: 1rem;
-        }
     }
 `;
 
@@ -21,30 +18,38 @@ const CommentButton = styled(Button)`
 `;
 
 
-const PostComments = () => {
+const PostComments = ({ postId, comments, user, changeInput }) => {
+    // const dispatch = useDispatch();
+
+    //댓글 입력하기
+    // const onChange = (e) => {
+    //     changeInput(e.target.value);
+    // }
+    
+    //댓글 전송하기
+    // const onSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(writeComment(user, postId, comments.input))
+    //     changeInput('');
+    // };
+
     return (
         <PostCommentsBlock>
-            <form>
+            <form 
+            // onSubmit={onSubmit}
+            >
                 <Input 
                 type="text"
                 placeholder="댓글을 입력해주세요." 
                 name="comment"
-                value=""
+                // onChange={onChange}
                 />
                 <CommentButton>등록</CommentButton>
             </form>
-            <ul className="comments-list">
-                <li>
-                    <span>zzang </span>
-                    <span>2021.11.20</span>
-                    <p>입력한 댓글 표시</p>
-                </li>
-                <li>
-                    <span>juhee </span>
-                    <span>2021.11.20</span>
-                    <p>입력한 댓글 표시</p>
-                </li>
-            </ul>
+            <CommentList
+            //comments={comments}
+            //user={user}
+            />
         </PostCommentsBlock>
     );
 };
