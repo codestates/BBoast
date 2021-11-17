@@ -18,8 +18,16 @@ const palette = {
         '#bdbdbd',
         '#9e9e9e',
         '#757575',
+    ],
+    wheat: [
+        '#f5deb3',
+    ],
+    red: [
+        '#FF0000',
+        '#CD5C5C',
+        '#C70039',
     ]
-
+    
 };
 
 export default palette;
