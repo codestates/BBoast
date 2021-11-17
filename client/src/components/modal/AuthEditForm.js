@@ -54,6 +54,12 @@ const AuthButton = styled(Button)`
     margin-top: 1rem;
     font-size: 1.2rem;
 `;
+const ErrorMessage = styled.div`
+font-size: 15px;
+color: ${palette.red[0]};
+text-align: center;
+padding-top: 1rem;
+`
 
 const AuthEditForm = ({ deleteUserClick, modalToggle }) => {
     
@@ -131,15 +137,23 @@ const AuthEditForm = ({ deleteUserClick, modalToggle }) => {
 
     const handleEdit = (e) => {
         e.preventDefault();
-        const { name, email, password, confirm } = userInfo;
+        const { name, email, password, passwordConfirm } = userInfo;
         // Todo: Store 만들어서 유저 정보를 전역 변수를 관리해야 한다.
-        if( name === '' || email === '' || password === '' || confirm === ''){
-            setErrorMessage('모든 항목은 필수입니다')
+        if( name === '' || email === '' || password === '' || passwordConfirm === ''){
+            setErrorMessage('모든 항목은 필수입니다.')
+            setTimeout(() => setErrorMessage(''), 3000)
+        } else if( password !== passwordConfirm) {
+            setErrorMessage('비밀번호가 일치하지 않습니다.')            
+            setTimeout(() => setErrorMessage(''), 3000)
+        } else if( name === state.username && email === state.email && password === state.password ) {
+            setErrorMessage('수정할 정보가 없습니다.')            
+            setTimeout(() => setErrorMessage(''), 3000)
         } else {
-            axios.patch('https://localhost:3000/edit', { name, email, password, confirm }, { headers : { 'Content-Type' : 'application/json'}})
+            axios.patch('http://localhost:4000/edit', { name, email, password }, { headers : { 'Content-Type' : 'application/json'}})
             .then((data) => {
                 // ToDo: 받아온 데이터를 상태에 저장합니다.
-                // ! dispatch(userInfoEdit(username, email, password))
+                console.log(data)
+                dispatch(userInfoEdit(name, email, password))
                 // 로그인 창으로 이동합니다.
                 history.push("/mypage")
             })
@@ -147,8 +161,8 @@ const AuthEditForm = ({ deleteUserClick, modalToggle }) => {
                 setErrorMessage('올바르지 않은 회원정보입니다.')
             })
         }
-
     }
+
     return (
         <div>
         <AuthEditFormBlock>
@@ -189,6 +203,7 @@ const AuthEditForm = ({ deleteUserClick, modalToggle }) => {
                 />
                 <Message>{passwordConfirmMessage}</Message>
                 <AuthButton onClick={handleEdit}>Edit</AuthButton>
+                <ErrorMessage>{errorMessage}</ErrorMessage>
             </form>
             <div className="userInfo-delete" onClick={deleteUserClick}>
                 <p>Delete your <b>BBoast</b> account</p>

@@ -137,17 +137,13 @@ const AuthSignUpForm = () => {
             setErrorMessage('비밀번호가 일치하지 않습니다.')
             setTimeout(() => setErrorMessage(''), 3000)
         } else {
-            axios.post('https://localhost:3000/signup', { name, email, password }, { headers : { 'Content-Type' : 'application/json'}})
+            axios.post('http://localhost:4000/signup', { name, email, password }, { headers : { 'Content-Type' : 'application/json'}})
             .then((data) => {
-                if(data){
-                    setErrorMessage('이미 가입된 회원입니다.')
-                } else {
                     // 로그인 창으로 이동합니다.
                     history.push("/")
-                }
             })
             .catch((err) => {
-                setErrorMessage('서버로부터의 응답이 없습니다.')
+                setErrorMessage('이미 가입된 회원입니다.')
                 setTimeout(() => setErrorMessage(''), 3000)
                 
             })

@@ -12,16 +12,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
+<<<<<<< HEAD
     origin:
      "http://localhost:3000/"
     //   "http://bboast.net.s3-website-us-east-1.amazonaws.com/",
     //   "https://d18mexsgb8jp34.cloudfront.net/",
     //   "https://www.bboast.net/"
     ,
+=======
+    origin: '*',
+>>>>>>> 51608193e458f6782a0567e70acfefa2313a6865
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE']
   })
 );
+<<<<<<< HEAD
 
 sequelize.sync({ force: false }) // 이 코드 발견 시 시퀄라이즈 실행
 .then(() => {
@@ -32,9 +37,16 @@ sequelize.sync({ force: false }) // 이 코드 발견 시 시퀄라이즈 실행
 })
 
 
+=======
+app.use(cookieParser());
+// app.get('/authAccesstoken', controllers.authAccesstoken);
+// app.get('/authRefreshtoken', controllers.authRefreshtoken);
+app.post('/signup', controllers.signup);
+app.delete('/withdrawal', controllers.withdrawal);
+>>>>>>> 51608193e458f6782a0567e70acfefa2313a6865
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
-
+app.patch('/edit', controllers.edit)
 const port = 4000;
 
 app.get('/', (req, res) => {
