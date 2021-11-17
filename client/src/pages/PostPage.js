@@ -8,6 +8,7 @@ import PostContents from '../components/post/PostContents';
 import Footer from '../components/common/Footer';
 import Nav from '../components/common/Nav';
 import { viewPost, initializeViewPost } from '../reducer/postReducer';
+import palette from '../style/palette';
 
 const PostPageBlock = styled.div`
     width: 40%;
@@ -20,7 +21,7 @@ const PostPageBlock = styled.div`
         font-size: 2rem;
     }
     span {
-        color: #b3b3b3;
+        color: ${palette.gray[4]};
     }
     .move-btn {
         display: flex;
@@ -32,11 +33,12 @@ const PostPageBlock = styled.div`
 const PostPage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { post, error, loading, comments } = useSelector(({ post, error, loading, comment, cool }) => ({
+    const { post, error, loading, comments, comment_content } = useSelector(({ post, error, loading, comment, cool }) => ({
         post: post.post,
         error: post.error,
         loading: post.loading,
         comments: comment.comments,
+        comment_content: comment.comment_content
         // coolBtn : 
     }));
 
@@ -94,6 +96,7 @@ const PostPage = () => {
                 //onClickCoolBtn={onClickCoolBtn}
                 />
                 <PostComments
+                //comment_content={comment_content}
                 //comments={comments}
                 //postId={id}
                 //user={user}
