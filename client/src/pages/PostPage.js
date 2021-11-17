@@ -12,7 +12,6 @@ const PostPageBlock = styled.div`
     min-width: 320px;
     margin: 0 auto;
     padding: 2rem 4rem;
-    margin-top: 2rem;
     background: #fff;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
     h1 {
@@ -32,13 +31,18 @@ const PostPage = () => {
     /*
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { post, error, loading, comments, user } = useSelector(({ post, error, loading, comment }) => ({
+    const { post, error, loading, comments, coolBtn } = useSelector(({ post, error, loading, comment, cool }) => ({
         post: post.post,
         error: post.error,
         loading: post.loading,
         comments: comments.comments,
-        user: user.user
+        coolBtn : 
     }));
+
+    쿨버튼 클릭
+    const onClickCoolBtn = (포스트 아이디, 유저 아이디) => {
+        dispatch(clickCoolBtn(포스트 아이디, 유저 아이디));
+    }
 
     useEffect(() => {
         dispatch(viewPost(id));
@@ -70,6 +74,7 @@ const PostPage = () => {
                 </div>
                 <PostContents
                 //post={post}
+                //onClickCoolBtn={onClickCoolBtn}
                 />
                 <PostComments
                 //comments={comments}

@@ -9,10 +9,10 @@ const GET_POSTS_FAILURE = 'GET_POSTS_FAILURE';
 
 //액션 생성 함수 
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (hashtag) => async (dispatch) => {
     dispatch({ type: GET_POSTS }); //시작 
     try {
-      const response = await api.getPosts();
+      const response = await api.getPosts(hashtag);
       dispatch({
         type: GET_POSTS_SUCCESS,
         payload: response.data,

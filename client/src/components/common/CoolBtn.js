@@ -1,20 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FiThumbsUp } from 'react-icons/fi'
+import { RiThumbUpLine, RiThumbUpFill} from 'react-icons/ri'
 
 const CoolBtnContainer = styled.div`
     display:flex;
     justify-content: center;
     align-items: center;
-    height: 20px;
-    width: 50px;
-    background-color: #FAFAFA;
-    border: none;
     color: #00C6BC;
     font-weight: 700;
     border-radius: 40px;
-    font-size: 14px;
-    border: solid 1px #00C6BC;
     cursor: pointer;
 `;
 
@@ -25,13 +19,21 @@ const BtnNum = styled.div`
     align-items: flex-end;
     color: #00C6BC;
     margin-left: 5px;
-    font-size: 10px;
+    font-size: 0.7rem;
 `;
 
-const CoolBtn = () => {
+const CoolBtn = ({ onClickCoolBtn }) => {
+    /*
+    쿨버튼의 값을 받아와서
+    클릭되면 눌린 상태값과 카운트 적용 
+    */
+
     return (
-        <CoolBtnContainer>
-            <FiThumbsUp />
+        <CoolBtnContainer 
+        //onClick={onClickCoolBtn}
+        >
+            {/* {done ? <RiThumbUpFill /> : <RiThumbUpLine />}  */}
+            <RiThumbUpLine />
             <BtnNum>12</BtnNum>
         </CoolBtnContainer>
     )

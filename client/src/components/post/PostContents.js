@@ -8,7 +8,7 @@ const ContentsBlock = styled.div`
     .image-box {
         margin-top: 2rem;
         width: 100%;
-        display: flex;
+        padding: 0 10rem;
         img {
             width: 100%;
             object-fit: cover;
@@ -22,19 +22,20 @@ const ContentsBlock = styled.div`
     }
 `;
 
-const PostContents = ({ post }) => {
+const PostContents = ({ post, onClickCoolBtn }) => {
     // const { post_title, post_content, post_image, hashtags } = post
     return (
         <ContentsBlock>
             <div className="image-box">
-                이미지
                 <img src="" alt="" />
             </div>
             <div className="tag-box">
                 <Hashtag
                 //hashtags={hashtags}
                 />
-                <CoolBtn/>
+                <CoolBtn
+                //onClickCoolBtn={onClickCoolBtn}
+                />
             </div>
             <p>description</p>
         </ContentsBlock>

@@ -1,29 +1,25 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 export const NavContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 10%;
-    font-size: 30px;
-    border-bottom: red;
-    padding: 10px;
+    font-size: 3.2rem;
+    padding: 3rem 4rem;
     align-items: center;
-    background: #fafafa;
 `;
 
 export const NavBtn = styled(Link)`
-    width: 100px;
-    text-align: center;
-    border: 3px solid;
     border-style: none;
-    height: 40px;
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight: 500;
     color: black;
     text-decoration: none;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
     &:hover {
         font-weight: 800;
         border-bottom: 3px solid #F4DC00;
@@ -31,27 +27,20 @@ export const NavBtn = styled(Link)`
 `;
 
 export const LogoContainer = styled.a`
-    width: 15%;
-    height: 100%;
-    font-size: 48px;
+    flex: 1;
     font-weight: 900;
     color: #F4DC00;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
 `;
 
 export const BtnContainer = styled.div`
-    width: 15%;
-    right: 0;
+    flex: 1;
     display: flex;
     justify-content: flex-end;
-    height: 100%;
     align-items: center;
-    position: relative;
-    right: 0;
 `;
 
 const Nav = () => {

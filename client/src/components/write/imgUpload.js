@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RiImageAddLine } from 'react-icons/ri';
 import { FaTimes } from 'react-icons/fa';
@@ -34,26 +33,7 @@ const ImgFileBox = styled.div`
     }
 `;
 
-const ImgUpload = () => {
-    const [imgFile, setImgFile] = useState('');
-
-    //사진 미리보기
-    const onFileChange = e => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => {
-            const { result } = finishedEvent.currentTarget
-            setImgFile(result)
-        }
-        if(file){
-            //readAsDataURL함수 : 파일 정보를 인자로 받아서 파일 위치를 URL로 반환
-            reader.readAsDataURL(file);
-        }
-    }
-    //선택한 사진 취소하기
-    const onRemoveImgFile = () => {
-        setImgFile('')
-    }
+const ImgUpload = ({ onFileChange, onRemoveImgFile, imgFile }) => {
 
     return (
         <ImgUploadBlock>
