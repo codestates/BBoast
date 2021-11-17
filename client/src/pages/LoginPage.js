@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthTemplate from '../components/auth/AuthTemplate';
-import AuthForm from '../components/auth/AuthForm'
+import AuthLoginForm from '../components/auth/AuthLoginForm'
 import Button from '../components/common/Button';
 import styled from 'styled-components';
 import { FcGoogle } from 'react-icons/fc';
@@ -28,7 +28,7 @@ const SocialButton = styled(Button)`
 const LoginPage = () => {
     return (
         <AuthTemplate>
-            <AuthForm type="login"/>
+            <AuthLoginForm/>
             <SocialLoginBox>
                 <SocialButton>
                     <FcGoogle/> 
