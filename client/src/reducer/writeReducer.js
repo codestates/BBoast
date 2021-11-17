@@ -3,6 +3,9 @@ import * as api from '../lib/api';
 //글쓰기 페이지 모든 내용 초기화
 const WRITE_INITIALIZE = 'WRITE_INITIALIZE';
 
+//입력값 
+const CHANGE_FIELD = 'CHANGE_FIELD';
+
 //글 등록하기
 const WRITE_POST = 'WRITE_POST'; 
 const WRITE_POST_SUCESS = 'WRITE_POST_SUCESS'; 
@@ -20,20 +23,25 @@ export const writeInitialize = () => ({
     type: WRITE_INITIALIZE,
 });
 
+export const changeField = ({ key, value }) => ({
+    type: CHANGE_FIELD,
+    payload: { key, value },
+})
+
 export const addHashtag = (hashtag) => ({
     type: ADD_HASHTAG,
     hashtag,
-})
+});
 
 export const removeHashtag = (id) => ({
     type: REMOVE_HASHTAG,
     id,
-})
+});
 
-export const writePost = ({ post_title, post_content, post_image, hashtags }) => async (dispatch) => {
+export const writePost = ({ post_title, post_content, hashtags }) => async (dispatch) => {
     dispatch({ type: WRITE_POST }); //시작 
     try {
-      const response = await api.writePost({ post_title, post_content, post_image, hashtags });
+      const response = await api.writePost({ post_title, post_content, hashtags });
       dispatch({
         type: WRITE_POST_SUCESS,
         payload: response.data,
@@ -64,6 +72,11 @@ const write = (state=initialState, action) => {
     switch(action.type){
         case WRITE_INITIALIZE: 
             return initialState;
+        case CHANGE_FIELD:
+            return {
+                ...state,
+                [action.payload.key]: action.payload.value,
+            }
         case WRITE_POST:
             return {
                 ...state,
@@ -86,12 +99,12 @@ const write = (state=initialState, action) => {
         case ADD_HASHTAG:
             return {
                 ...state,
-                hashtags: [...state.hashtags, action.payload],
+                hashtags: [...state.hashtags, action.hashtag],
             }
         case REMOVE_HASHTAG:
             return {
                 ...state,
-                hashtags: [...state.hashtags.filter((tag, idx) => idx !== action.payload)]
+                hashtags: [...state.hashtags.filter((tag, idx) => idx !== action.id)]
             }
         default:
             return initialState;
