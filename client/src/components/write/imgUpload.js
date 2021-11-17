@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RiImageAddLine } from 'react-icons/ri';
 import { FaTimes } from 'react-icons/fa';
@@ -35,7 +34,7 @@ const ImgFileBox = styled.div`
 `;
 
 const ImgUpload = ({ onFileChange, onRemoveImgFile, imgFile }) => {
-    
+
     return (
         <ImgUploadBlock>
             <div>
