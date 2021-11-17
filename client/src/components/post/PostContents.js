@@ -8,7 +8,7 @@ const ContentsBlock = styled.div`
     .image-box {
         margin-top: 2rem;
         width: 100%;
-        display: flex;
+        padding: 0 10rem;
         img {
             width: 100%;
             object-fit: cover;
@@ -27,7 +27,6 @@ const PostContents = ({ post }) => {
     return (
         <ContentsBlock>
             <div className="image-box">
-                이미지
                 <img src="" alt="" />
             </div>
             <div className="tag-box">
