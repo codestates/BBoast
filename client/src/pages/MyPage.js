@@ -7,6 +7,10 @@ import AuthEditModal from '../components/modal/AuthEditModal';
 import AuthEditForm from '../components/modal/AuthEditForm';
 import Button from '../components/common/Button';
 import palette from '../style/palette';
+import AskCheckModal from '../components/modal/AskCheckModal';
+import { removePost } from '../lib/api';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MyPageContainer = styled.div`
     width: 40%;
@@ -75,13 +79,31 @@ const MyPost = styled.li`
 
 const MyPage = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [checkModal, setCheckModal] = useState(false);
+    // const history = useHistory
+
+    // const { userInfo, posts } = useSelector(({ auth, posts }) => ({
+    //     userInfo: auth.userInfo,
+    //     posts: posts.posts, 
+    // }));
+
+    //글 삭제
+    // const onRemove = async () => {
+    //     try {
+    //         await removePost(postId);
+    //         history.push('/main');
+    //     } catch(e){
+    //         console.log(e)
+    //     }
+    // }
+
     const modalToggle = () => {
         isOpen ? setIsOpen(false) : setIsOpen(true)
     }
 
-    // ToDo: 글 삭제 핸들러 함수
-    const handleDeleteBtn = () => {
-        
+    //글 삭제 확인 모달
+    const onConfirmModal = () => {
+        setCheckModal(!checkModal);
     }
 
     return (
@@ -107,7 +129,7 @@ const MyPage = () => {
                             <div className="thumbnail">
                                 <img alt="mypost" src="https://en.pimg.jp/043/365/839/1/43365839.jpg" />
                             </div>
-                            <div  className="delete-btn" onClick={handleDeleteBtn}>
+                            <div  className="delete-btn" onClick={onConfirmModal}>
                                 <FaTimes />
                             </div>
                         </MyPost>
@@ -115,7 +137,7 @@ const MyPage = () => {
                             <div className="thumbnail">
                                 <img alt="mypost" src="https://png.pngtree.com/png-clipart/20210130/ourlarge/pngtree-pink-quilt-get-up-clip-art-png-image_2836982.jpg" />
                             </div>
-                            <div className="delete-btn" onClick={handleDeleteBtn}>
+                            <div className="delete-btn" onClick={onConfirmModal}>
                                 <FaTimes />
                             </div>
                         </MyPost>
@@ -123,7 +145,7 @@ const MyPage = () => {
                             <div className="thumbnail">
                                 <img alt="mypost" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd798uRbi3sIPw4eLfinsK0G2i_wQjNlrLDw&usqp=CAU" />
                             </div>
-                            <div className="delete-btn" onClick={handleDeleteBtn}>
+                            <div className="delete-btn" onClick={onConfirmModal}>
                                 <FaTimes />
                             </div>
                         </MyPost>
@@ -131,15 +153,21 @@ const MyPage = () => {
                 </div>
             </MyPageContainer>
             <Footer/>
-                {
-                    isOpen ?
-                    (
-                        <AuthEditModal modalToggle={modalToggle}>
-                            <AuthEditForm/>
-                        </AuthEditModal>
-                    ) : 
-                    null
-                }
+            {
+                isOpen ?
+                (
+                    <AuthEditModal modalToggle={modalToggle}>
+                        <AuthEditForm/>
+                    </AuthEditModal>
+                ) : 
+                null
+            }
+            { checkModal && (
+            <AskCheckModal 
+            onConfirmModal={onConfirmModal}
+            //onRemove={onRemove}
+            />
+            )}
         </>
     );
 }
