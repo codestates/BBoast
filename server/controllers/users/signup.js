@@ -1,5 +1,5 @@
 const { users } = require('../../models');
-const { generateAccessToken, resendAccessToken } = require('../tokenfunctions');
+const { generateAccessToken, sendAccessToken, generateRefreshToken, sendRefreshToken } = require('../tokenFunctions');
 
 module.exports = (req, res) => {
   // 회원가입 및 사용자 생성
@@ -15,9 +15,10 @@ module.exports = (req, res) => {
       } else {
         delete user.dataValues.password
         const accessToken = generateAccessToken(user)
+        const refreshToken = generateRefreshToken(user)
         res.status(201)
-        sendAccessToken(res, accessToken)
-
+        sendAccessToken(res, accessToken);
+        sendRefreshToken(res, refreshToken);
       }
     })
     .catch((err) => console.log(err))

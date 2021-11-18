@@ -11,9 +11,9 @@ module.exports = {
     return sign(data, process.env.REFRESH_SECRET, { expiresIn: "5m" });
   },
   sendRefreshToken: (res, refreshToken) => {
-    // res.cookie("refreshToken", refreshToken, {
-    //   httpOnly: true,
-    // });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+    });
     // 스프린트에선 refreshToken을 쿠키에 저장
     // 그러나 프로젝트에서는 더 안전하게 DB에 저장하도록 한다 (?)
 
