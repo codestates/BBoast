@@ -83,13 +83,17 @@ const PostPage = () => {
 
     // const { id, post_title, post_content, post_image, created_at, hashtags} = post
 
+    //현재 날짜
+    const date = new Date().toLocaleDateString('ko-KR');
+    const today = date.slice(0, date.length - 1)
+    
     return (
         <>
             <Nav/>
             <PostPageBlock>
                 <div>
                     <h1>title</h1>
-                    <span>2021.11.20</span>
+                    <span>{today}</span>
                 </div>
                 <PostContents
                 //post={post}
