@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import palette from '../../style/palette';
 
 export const NavContainer = styled.div`
     display: flex;
@@ -22,7 +23,7 @@ export const NavBtn = styled(Link)`
     margin: 0 0.5rem;
     &:hover {
         font-weight: 800;
-        border-bottom: 3px solid #F4DC00;
+        border-bottom: 3px solid ${palette.orange[2]};
     }
 `;
 

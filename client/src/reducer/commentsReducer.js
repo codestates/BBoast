@@ -1,16 +1,16 @@
 import * as api from '../lib/api';
 
-//인풋값 변경
-const CHANGE_INPUT = 'CHANGE_INPUT';
+//입력값 변경
+const CHANGE_FIELD = 'CHANGE_FIELD';
 
 //코멘트 등록하기
 const WRITE_COMMENTS = 'WRITE_COMMENTS';
 const WRITE_COMMENTS_SUCCESS = 'WRITE_COMMENTS_SUCCESS';
 const WRITE_COMMENTS_FAILURE = 'WRITE_COMMENTS_FAILURE';
 
-export const changeInput = (input) => ({
-    type: CHANGE_INPUT,
-    input,
+export const changeField = ({ key, value }) => ({
+    type: CHANGE_FIELD,
+    payload: { key, value },
 })
 
 export const writeComment = ({ user_id, id, comment_content }) => async dispatch => {
@@ -31,6 +31,7 @@ export const writeComment = ({ user_id, id, comment_content }) => async dispatch
 }
 
 const initialState = {
+    comment_content: '',
     comments: null,
     loading: false,
     error: null,
@@ -38,10 +39,10 @@ const initialState = {
 
 const comment = ( state=initialState, action) => {
     switch(action.type){
-        case CHANGE_INPUT:
+        case CHANGE_FIELD:
             return {
                 ...state,
-                input: action.input,
+                [action.payload.key]: action.payload.value,
             }
         case WRITE_COMMENTS:
             return {
