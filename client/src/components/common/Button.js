@@ -7,7 +7,8 @@ const ButtonStyle = styled.button`
     font-size: 1rem;
     font-weight: bold;
     color: #fff;
-    background: ${palette.orange[0]};;
+    background: ${palette.orange[0]};
+    transition: .3s;
     cursor: pointer;
     &:hover {
         background: ${palette.orange[2]};

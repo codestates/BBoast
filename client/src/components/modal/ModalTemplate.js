@@ -35,11 +35,11 @@ const ModalBox = styled.div`
 
 
 
-const ModalTemplate = ({ children, modalToggle}) => {
+const ModalTemplate = ({ children, onConfirmModal}) => {
     return (
         <ModalBackground >
             <ModalBox >
-                <div className="close" onClick={modalToggle} >
+                <div className="close" onClick={onConfirmModal} >
                     <FaTimes />
                 </div>
             { children }

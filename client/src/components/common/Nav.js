@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../style/palette';
+import logo from '../../lib/image/logo.jpeg';
 
 export const NavContainer = styled.div`
     display: flex;
@@ -11,6 +12,9 @@ export const NavContainer = styled.div`
     font-size: 3.2rem;
     padding: 3rem 4rem;
     align-items: center;
+    .space {
+        flex: 1;
+    }
 `;
 
 export const NavBtn = styled(Link)`
@@ -27,17 +31,18 @@ export const NavBtn = styled(Link)`
     }
 `;
 
-export const LogoContainer = styled.a`
+const LogoContainer = styled(Link)`
     flex: 1;
-    font-weight: 900;
-    color: #F4DC00;
-    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    .logo {
+        width: 50%;
+        height: 100px;
+    }
 `;
 
-export const BtnContainer = styled.div`
+const BtnContainer = styled.div`
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -52,19 +57,26 @@ const Nav = () => {
         { name: 'logout', to: '/' }
     ];
 
-    return <NavContainer>
-        <LogoContainer href="/">
-
-        </LogoContainer>
-        <LogoContainer href="/">
-            BBoast‼
-        </LogoContainer>
-        <BtnContainer>
-            {
-                btnArr.map((btn, idx) => <NavBtn key={idx} to={btn.to}>{btn.name}</NavBtn>)
-            }
-        </BtnContainer>
-    </NavContainer>
+    return (
+        <NavContainer>
+            <div className="space"></div>
+            <LogoContainer to="/main">
+                <div className="logo"
+                style={{ 
+                    backgroundImage: `url(${logo})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }}
+                >
+                </div>
+            </LogoContainer>
+            <BtnContainer>
+                {
+                    btnArr.map((btn, idx) => <NavBtn key={idx} to={btn.to}>{btn.name}</NavBtn>)
+                }
+            </BtnContainer>
+        </NavContainer>
+    )
 }
 
 export default Nav;

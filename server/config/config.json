@@ -3,7 +3,11 @@
     "username": "admin",
     "password": "12341234",
     "database": "bbserver",
+<<<<<<< HEAD
+    "host": "bbserver.c0m4ujuvnkhe.ap-northeast-2.rds.amazonaws.com",
+=======
     "host": "bbdatabase.c0m4ujuvnkhe.ap-northeast-2.rds.amazonaws.com",
+>>>>>>> 9aa59f4d4be1c0838ee6dfd0d361eddd4daa00a0
     "dialect": "mysql"
   },
   "test": {

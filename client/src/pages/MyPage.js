@@ -3,108 +3,107 @@ import styled from 'styled-components';
 import Footer from '../components/common/Footer';
 import Nav from '../components/common/Nav';
 import { FaTimes } from 'react-icons/fa';
-import ModalTemplate from '../components/modal/ModalTemplate';
 import AuthEditModal from '../components/modal/AuthEditModal';
 import AuthEditForm from '../components/modal/AuthEditForm';
+import Button from '../components/common/Button';
 import palette from '../style/palette';
+import AskCheckModal from '../components/modal/AskCheckModal';
+import { removePost } from '../lib/api';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MyPageContainer = styled.div`
-    width: 30%;
+    width: 40%;
     min-width: 320px;
     margin: 0 auto;
     padding: 2rem;
     margin-top: 2rem;
     background: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    .check-btn {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    .myposts-title {
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid ${palette.gray[4]};
     }
 `;
 
 const MyInfo = styled.div`
-
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     width: 100%;
-    margin-top : 1em;    
-    margin-bottom: 5em;
-`;
-
-const EditBtn = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 26px;
-    width: 80px;
-    border: solid 1px black;
-    background-color: #FAFAFA;
-    border-radius: 10px;
-    color: black;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    &:hover {
-        background-color: ${palette.gray[2]}
+    margin-bottom: 3rem;
+    .profile {
+       display: flex;
+       flex-direction: column;
+       h3 {
+           margin-bottom: 0.5rem;
+       }
+       p {
+           color: ${palette.gray[4]};
+       }
     }
-    
-`;
-
-const MyPostsContainer = styled.div`
-    width: 100%;
-    height: 300px;
-`
-
-const MyPosts = styled.ul`
-    height: 100%;
-    width: 100%;
-    display:flex;
-    justify-content: space-around;
-`;
-
-const MyPost = styled.li`
-    width: 100%;
-    font-size: 25px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: black;
-    position: relative;
-`;
-
-const Thumbnail = styled.img`
-    width: 90%;
-    height: 60%;
-    position: absolute;
-    border-radius: 15px;
 `;
 
 const ProfileImage = styled.img`
-    height: 90px;
     width: 90px;
     border-radius: 50%;
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
 `;
 
-const DeleteBtn = styled.div`
+const EditBtn = styled(Button)`
+    border-radius: 25px;    
+`;
+
+const MyPosts = styled.ul`
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+`;
+
+const MyPost = styled.li`
+    width: 30%;
     position: relative;
-    bottom: 70px;
-    left: 55px;
-    font-size: 20px;
-    cursor: pointer;
+    .thumbnail {
+        img {
+            width: 100%;
+        }
+    }
+    .delete-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.5rem;
+        cursor: pointer;
+    }
 `;
 
 const MyPage = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [checkModal, setCheckModal] = useState(false);
+    // const history = useHistory
+
+    // const { userInfo, posts } = useSelector(({ auth, posts }) => ({
+    //     userInfo: auth.userInfo,
+    //     posts: posts.posts, 
+    // }));
+
+    //글 삭제
+    // const onRemove = async () => {
+    //     try {
+    //         await removePost(postId);
+    //         history.push('/main');
+    //     } catch(e){
+    //         console.log(e)
+    //     }
+    // }
+
     const modalToggle = () => {
         isOpen ? setIsOpen(false) : setIsOpen(true)
     }
 
-    // ToDo: 글 삭제 핸들러 함수
-    const handleDeleteBtn = () => {
-        
+    //글 삭제 확인 모달
+    const onConfirmModal = () => {
+        setCheckModal(!checkModal);
     }
 
     return (
@@ -122,41 +121,53 @@ const MyPage = () => {
                     </div>
                 </MyInfo>
                 <div>
-                    <h2 className="myposts-title"> 내가 쓴 글 목록</h2>
+                    <h2 className="myposts-title"> 나의 글 목록</h2>
                 </div>
-                <MyPostsContainer>
-                <MyPosts>
-                    <MyPost>
-                        <Thumbnail alt="mypost" src="https://en.pimg.jp/043/365/839/1/43365839.jpg" />
-                        <DeleteBtn onClick={handleDeleteBtn}>
-                            <FaTimes />
-                        </DeleteBtn>
-                    </MyPost>
-                    <MyPost>
-                        <Thumbnail alt="mypost" src="https://png.pngtree.com/png-clipart/20210130/ourlarge/pngtree-pink-quilt-get-up-clip-art-png-image_2836982.jpg" />
-                        <DeleteBtn onClick={handleDeleteBtn}>
-                            <FaTimes />
-                        </DeleteBtn>
-                    </MyPost>
-                    <MyPost>
-                        <Thumbnail alt="mypost" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd798uRbi3sIPw4eLfinsK0G2i_wQjNlrLDw&usqp=CAU" />
-                        <DeleteBtn onClick={handleDeleteBtn}>
-                            <FaTimes />
-                        </DeleteBtn>
-                    </MyPost>
-                </MyPosts>
-                </MyPostsContainer>
+                <div>
+                    <MyPosts>
+                        <MyPost>
+                            <div className="thumbnail">
+                                <img alt="mypost" src="https://en.pimg.jp/043/365/839/1/43365839.jpg" />
+                            </div>
+                            <div  className="delete-btn" onClick={onConfirmModal}>
+                                <FaTimes />
+                            </div>
+                        </MyPost>
+                        <MyPost>
+                            <div className="thumbnail">
+                                <img alt="mypost" src="https://png.pngtree.com/png-clipart/20210130/ourlarge/pngtree-pink-quilt-get-up-clip-art-png-image_2836982.jpg" />
+                            </div>
+                            <div className="delete-btn" onClick={onConfirmModal}>
+                                <FaTimes />
+                            </div>
+                        </MyPost>
+                        <MyPost>
+                            <div className="thumbnail">
+                                <img alt="mypost" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd798uRbi3sIPw4eLfinsK0G2i_wQjNlrLDw&usqp=CAU" />
+                            </div>
+                            <div className="delete-btn" onClick={onConfirmModal}>
+                                <FaTimes />
+                            </div>
+                        </MyPost>
+                    </MyPosts>
+                </div>
             </MyPageContainer>
             <Footer/>
-                {
-                    isOpen ?
-                    (
-                        <AuthEditModal modalToggle={modalToggle}>
-                            <AuthEditForm/>
-                        </AuthEditModal>
-                    ) : 
-                    null
-                }
+            {
+                isOpen ?
+                (
+                    <AuthEditModal modalToggle={modalToggle}>
+                        <AuthEditForm/>
+                    </AuthEditModal>
+                ) : 
+                null
+            }
+            { checkModal && (
+            <AskCheckModal 
+            onConfirmModal={onConfirmModal}
+            //onRemove={onRemove}
+            />
+            )}
         </>
     );
 }

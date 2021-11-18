@@ -9,7 +9,7 @@ const PostItemStyle = styled.div`
     padding: 2rem;
     margin-top: 3rem;
     border-radius: 4px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     .img-box {
         width: 100%;
         height: 200px;

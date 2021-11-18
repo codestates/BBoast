@@ -16,7 +16,7 @@ const PostPageBlock = styled.div`
     margin: 0 auto;
     padding: 2rem 4rem;
     background: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     h1 {
         font-size: 2rem;
     }
