@@ -15,7 +15,7 @@ const MyPageContainer = styled.div`
     padding: 2rem;
     margin-top: 2rem;
     background: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     .myposts-title {
         padding-bottom: 0.5rem;
         border-bottom: 1px solid ${palette.gray[4]};
