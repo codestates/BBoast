@@ -19,13 +19,30 @@ app.use(
   })
 );
 app.use(cookieParser());
-// app.get('/authAccesstoken', controllers.authAccesstoken);
-// app.get('/authRefreshtoken', controllers.authRefreshtoken);
+
+app.get('/authAccesstoken', controllers.authAccesstoken);
+app.get('/authRefreshtoken', controllers.authRefreshtoken);
+
 app.post('/signup', controllers.signup);
 app.delete('/withdrawal', controllers.withdrawal);
+
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 app.patch('/edit', controllers.edit)
+
+app.delete('/deleteComment', controllers.deleteComment);
+app.post('/writeComment', controllers.writeComment);
+
+app.get('/clickPost', controllers.clickPost);
+app.delete('/deletePost', controllers.deletePost);
+app.patch('/updatePost', controllers.updatePost);
+app.post('/writePost', controllers.writePost);
+
+app.get('/myPage', controllers.myPage);
+app.get('/cool', controllers.cool);
+app.get('/', controllers.main);
+
+
 const port = 4000;
 
 app.listen(port, () => {

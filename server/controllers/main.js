@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
 
     let cntHashTags = await hashTag.findAndCountAll();
 
-    let threeHashTags = randomNum(allHashTags) //랜덤 3개의 해시만 담긴 배열 완성
+    let threeHashTags = await randomNum(allHashTags.dataValues) //랜덤 3개의 해시정보만 담긴 배열 완성
      // allHashTags는 전체 해시태그 배열담기
 
     let randomNum = function (arr, newArr = []) {
@@ -28,18 +28,48 @@ module.exports = async (req, res) => {
          }
         }
 
-    const findAll3TagInfo = hashTag.findAll({ //await 가장 먼저 하는 작업
-        // attributes: ['id'],
-        include: 
-          {
-              where: {
-               hashtags: { [Op.in] : threeHashTags //[#일상, #맛집, #서울]
-                         }
-               }
-           }
-         }); // findAll3TagInfo = [{id, hashtags, user_id, post_id, created},{},{}]
+    // threeHashTags = [{}, {}, {}]
 
-    //[{hashTag_id, user_id, post_id, created}, {''}, {''}......] 셋 중 하나만 포함해도 무작위나열
+
+    const idsOf3HashTags = await threeHashTags.map((ele) => {
+      return ele.id
+    }); // 해시태그 아이디만 가져온거
+
+    const dataOfHashTag = await hashTag.findOne({
+        where : { 
+            hashtags : hashtag
+        }
+    }); //dataOfHashTag.dataValues = {id:, .....}
+
+    const allPost_idsContainHash = await post_hashtag.findAll({
+ 
+        attributes: ['post_id'],    //post_hashtag에서 조건 맞는 post_id 모두 가져옴  
+        where: {
+                hashtag_id: dataOfHashTag.dataValues.id      //post_hashtag.hashtag_id = hashtagId 인 조건
+               },
+         }); // [postid 1, 3, 5, .......]
+
+    const postsData = await allPost_idsContainHash.map((postid) => {
+        return posts.findAll({
+              where : {
+                 id : postid
+              }
+        });
+    }); // postsData.dataValues = [{},{},{},...] //특정 해시 포함하는 목록들
+
+    if(!postsData){
+        res.status(400).json({ data : null, message: '목록이 없습니다'})
+    }
+
+        res.status(200).json({ data : postsData.dataValues, message: '목록 전달'})
+
+
+
+
+
+
+
+
 
     const usersInfo = findAll3TagInfo.map((hashTagInfo = {hashTag_id, user_id, post_id, created}) => {
             const userInfo = users.findOne({where : hashTagInfo.user_id})

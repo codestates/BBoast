@@ -1,10 +1,10 @@
 const { users } = require('../../models');
-// const {
-//   generateAccessToken,
-//   generateRefreshToken,
-//   sendRefreshToken,
-//   sendAccessToken,
-// } = require('../tokenFunctions');
+const {
+  generateAccessToken,
+  generateRefreshToken,
+  sendRefreshToken,
+  sendAccessToken,
+} = require('../tokenFunctions');
 
 module.exports = (req, res) => {
   const { email, password } = req.body;
@@ -16,7 +16,7 @@ module.exports = (req, res) => {
   users.findOne({ where: { email, password } })
     .then((data) => {
       if (!data) {
-        res.status(404).send('invalid user')
+        res.status(401).send('invalid user')
       } else {
         // console.log(data)
         delete data.dataValues.password
