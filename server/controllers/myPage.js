@@ -1,5 +1,4 @@
-const { users, posts, hashTag } = require("../../models");
-
+const { users, posts, hashTag } = require("../models");
 // 마이페이지에서 내가쓴 글만 불러오기
 // 마이페이지 들어가는 순간 맨 위에 유저정보 전달해주기 (그냥 비번 빼고 전부 다 주기)
 

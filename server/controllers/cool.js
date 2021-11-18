@@ -7,7 +7,7 @@
 // 위 과정은 db가 업뎃되는 즉시 실행해서 async-await로 진행 
 // cool버튼 누르면 먼저 db를 건드리고 나중에 숫자를 세서 개수를 넘겨줘야 함
 
-const { cool } = require('../../models');
+const { cool } = require("../models");
 
 module.exports = (req, res) => {
 

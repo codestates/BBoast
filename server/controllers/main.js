@@ -1,4 +1,4 @@
-const { users, posts, hashTag } = require("../../models");
+const { users, posts, hashTag } = require("../models");
 
 // 메인화면으로 가면 데이터 목록 불러오기 로직
 // 해시태그 중에 랜덤으로 3개 선택 아마 배열..???
