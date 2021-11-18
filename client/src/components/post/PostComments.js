@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Input from '../auth/Input';
 import Button from '../common/Button';
 import CommentList from './CommentList';
+import { changeField, writeComment } from '../../reducer/commentsReducer';
 
 const PostCommentsBlock = styled.div`
     margin-bottom: 2rem;
@@ -18,19 +19,25 @@ const CommentButton = styled(Button)`
 `;
 
 
-const PostComments = ({ postId, comments, user, changeInput }) => {
-    // const dispatch = useDispatch();
+const PostComments = ({ postId, comments, comment_content }) => {
+    const dispatch = useDispatch();
 
     //댓글 입력하기
-    // const onChange = (e) => {
-    //     changeInput(e.target.value);
-    // }
+    const onChange = e => {
+        dispatch(changeField({
+            key: 'comment_content',
+            value: e.target.value
+        }));
+    }
     
     //댓글 전송하기
     // const onSubmit = (e) => {
     //     e.preventDefault();
-    //     dispatch(writeComment(user, postId, comments.input))
-    //     changeInput('');
+    //     dispatch(writeComment( auth, postId, comment_content))
+    //     dispatch(changeField({
+    //         key: 'comment_content',
+    //         value: ''
+    //     }));
     // };
 
     return (
@@ -42,13 +49,14 @@ const PostComments = ({ postId, comments, user, changeInput }) => {
                 type="text"
                 placeholder="댓글을 입력해주세요." 
                 name="comment"
-                // onChange={onChange}
+                value={comment_content}
+                onChange={onChange}
                 />
                 <CommentButton>등록</CommentButton>
             </form>
             <CommentList
             //comments={comments}
-            //user={user}
+            //auth={auth}
             />
         </PostCommentsBlock>
     );

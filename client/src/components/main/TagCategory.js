@@ -24,7 +24,7 @@ const TagCategoryStyle = styled(Link)`
     }
 `;
 
-const categories = ['#일상', '#멋짐', '#사소', '#플렉스', '#뻔뻔'];
+const categories = ['일상', '멋짐', '사소', '플렉스', '뻔뻔'];
 const TagCategory = () => {
     //카테고리 클릭하면 카테고리와 일치하는 글 목록 불러오기
     return (
@@ -35,7 +35,7 @@ const TagCategory = () => {
                    key={idx}
                    to={`/main?hashtag=${category}`}
                    > 
-                   {category}
+                   #{category}
                    </TagCategoryStyle>
                 )) 
               }  

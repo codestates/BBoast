@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import palette from '../../style/palette';
 
 const InputStyle = styled.input`
     width: 100%;
     font-size: 1rem;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid black;
     padding-bottom: 0.5rem;
     &:focus {
-        border-bottom: 1px solid green;
+        border-bottom: 1px solid black;
     }
     &::placeholder {
-        color: #b3b3b3;
+        color: ${palette.gray[4]};   
     }
     & + & {
         margin-top: 1rem;

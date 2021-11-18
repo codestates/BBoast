@@ -18,8 +18,8 @@ export const removePost = id => axios.delete(`http://localhost:4000/posts/${id}`
 
 //포스트에 댓글 추가하기
 export const writeComment = ({ user_id, id, comment_content }) =>
-    axios.post(`http://localhost:4000/posts/${id}/comments`, { user_id, comment_content });
+    axios.post(`http://localhost:4000/posts/comments`, { user_id, id, comment_content });
 
 //쿨버튼 클릭
 export const clickCoolBtn = ({ user_id, id }) => 
-axios.post(`http://localhost:4000/posts/${id}/cool`, { user_id });
+axios.post(`http://localhost:4000/posts/cool`, { user_id, id });
