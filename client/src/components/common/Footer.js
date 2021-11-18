@@ -8,14 +8,11 @@ bottom: 0;
 left: 0;
 justify-content: center;
 width: 100%;
-background-color: #FAFAFA;
 `
 
 export const FooterBody = styled.div`
 width: 30%;
 height: 100%;
-background-color: #FAFAFA;
-color: #666666;
 display: flex;
 justify-content: center;
 align-items: center;
