@@ -15,7 +15,7 @@ const WritePageBlock = styled.div`
     margin: 0 auto;
     padding: 2rem;
     background: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     .check-btn {
         display: flex;
         justify-content: flex-end;
@@ -33,7 +33,7 @@ const InputStyle = styled(Input)`
 
 const TextareaStyle = styled.textarea`
     width: 100%;
-    height: 25vh;
+    height: 42vh;
     font-size: 1.2rem;
     resize: none;
     margin-top: 2rem;

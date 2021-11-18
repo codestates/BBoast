@@ -1,5 +1,5 @@
 const { users } = require('../../models');
-const { generateAccessToken, resendAccessToken } = require('../tokenFunctions');
+const { generateAccessToken, resendAccessToken } = require('../tokenfunctions');
 
 module.exports = (req, res) => {
   // 회원가입 및 사용자 생성
