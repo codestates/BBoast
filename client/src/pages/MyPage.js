@@ -98,7 +98,7 @@ const MyPage = () => {
     // }
 
     const modalToggle = () => {
-        isOpen ? setIsOpen(false) : setIsOpen(true)
+        setIsOpen(!isOpen);
     }
 
     //글 삭제 확인 모달
@@ -156,7 +156,7 @@ const MyPage = () => {
             {
                 isOpen ?
                 (
-                    <AuthEditModal modalToggle={modalToggle}>
+                    <AuthEditModal modalToggle={modalToggle} isOpen={isOpen}>
                         <AuthEditForm/>
                     </AuthEditModal>
                 ) : 
