@@ -22,16 +22,17 @@ const AskDeleteUser = ({modalToggle}) => {
     const history = useHistory();
     // ToDo: 계정 삭제 핸들러
     const handleDelete = () => {
-        axios.delete('http://localhost:4000/withdrawal', { userInfo } ,
-        { withCredentials: true }
-    )
-        .then((res) => {
-            console.log(res)
-            history.push('/')
-        })
-        .catch((err) => {
-            history.push('/mypage')
-        })
+    //     axios.delete('http://localhost:4000/withdrawal', { userInfo } ,
+    //     { withCredentials: true }
+    // )
+    //     .then((res) => {
+    //         console.log(res)
+    //         history.push('/')
+    //     })
+    //     .catch((err) => {
+    //         history.push('/')
+    //     })
+        history.push('/');
     }
 
     return (

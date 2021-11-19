@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, userInfo } from '../../actions/authActions';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../common/Button';
 import Input from './Input';
@@ -59,7 +59,10 @@ padding-top: 1rem;
 
 
 const AuthLoginForm = () => {
-    const state = useSelector( state => state.auth);
+    const history = useHistory();
+    const { login } = useSelector(({ auth }) => ({
+        login: auth.login,
+    }));
     const dispatch = useDispatch();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
@@ -116,6 +119,7 @@ const AuthLoginForm = () => {
             .then((data) => {
                 console.log(data)
                 dispatch(login(data.email, data.password))
+                history.push('/main');
             })
             .catch((err) => {
                 setErrorMessage('서버로부터의 응답이 없습니다.')
