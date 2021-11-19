@@ -1,12 +1,12 @@
 const { posts, hashTag } = require("../../models");
 
 module.exports = async (req, res) => {
-  //delete 요청
+  
   const userInfo = req.userInfo
   const { post_id, hashTag_id, password } = req.body;
 
   if (password !== userInfo.password) {
-    return res.status(400).send({ message: "비밀번호가 일치하지 않습니다."});
+    return res.status(403).json({ message: "비밀번호가 일치하지 않습니다."});
   }
 
    posts
@@ -17,8 +17,8 @@ module.exports = async (req, res) => {
       })
       .then((data) => {
         if (!data) {
-          // return res.status(401).send({ data: null, message: 'not authorized' });
-          return res.json({ data: null, message: '해당 포스트가 존재하지 않습니다' });
+        res.status(401).json({ data: null, message: 'not authorized' });
+      
         }
           hashTag.destroy({
             where: {
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
                 hashTag_id
               }
           })
-          res.status(200).send('삭제되었습니다');
+          res.status(200).json({message : 'delete post'});
         })
       .catch((err) => {
         res.status(500).send('err');
